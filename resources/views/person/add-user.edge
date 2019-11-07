@@ -1,0 +1,74 @@
+@layout('layouts.main')
+
+@section('title')
+Add User
+@endsection
+
+@section('content')
+<div class="container mt-3">
+    <h1 class="text-center mb-5">Add User</h1>
+    <div class="container">
+        <div class="col-sm-8 offset-sm-2">
+
+            @if(flashMessage('message'))
+                <div class="alert alert-success">
+                    <span>{{flashMessage('message')}}</span>
+                </div>
+            @endif
+            
+            <form action="{{route('UserController.create')}}" method="POST">
+                {{csrfField()}}
+                <div class="form-group">
+                    <label for="firstname">Firstname</label>
+                    <input type="text" class="form-control" id="firstname" aria-describedby="firstname" name="firstname" placeholder="Enter firstname" value="{{old('firstname', '')}}">
+                    @if(hasErrorFor('firstname'))
+                        <div class="alert alert-danger mt-3">
+                            <span>{{getErrorFor('firstname')}}</span>
+                        </div>
+                    @endif
+                </div>
+
+                <div class="form-group">
+                    <label for="lastname">Lastname</label>
+                    <input type="text" class="form-control" id="lastname" aria-describedby="lastname" name="lastname" placeholder="Enter lastname" value="{{old('lastname', '')}}">
+                    @if(hasErrorFor('lastname'))
+                        <div class="alert alert-danger mt-3">
+                            <span>{{getErrorFor('lastname')}}</span>
+                        </div>
+                    @endif
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" aria-describedby="username" name="username" placeholder="Enter username" value="{{old('username', '')}}">
+                    @if(hasErrorFor('username'))
+                        <div class="alert alert-danger mt-3">
+                            <span>{{getErrorFor('username')}}</span>
+                        </div>
+                    @endif
+                </div>
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="email" name="email" placeholder="Enter email" value="{{old('email', '')}}">
+                    @if(hasErrorFor('email'))
+                        <div class="alert alert-danger mt-3">
+                            <span>{{getErrorFor('email')}}</span>
+                        </div>
+                    @endif
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                    @if(hasErrorFor('password'))
+                        <div class="alert alert-danger mt-3">
+                            <span>{{getErrorFor('password')}}</span>
+                        </div>
+                    @endif
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Add to List</button>
+            </form>
+        </div>
+    </div>
+</div>
+@endsection

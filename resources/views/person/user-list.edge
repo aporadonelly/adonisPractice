@@ -1,0 +1,36 @@
+@layout('layouts.main')
+
+@section('title')
+User List Page
+@endsection
+
+@section('content')
+    <div class="container">        
+        <table class="table table-hover mt-5">            
+            <thead>                
+                <tr>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            @if(flashMessage('message'))
+                <div class="alert alert-danger mt-5">
+                    <span>{{flashMessage('message')}}</span>
+                </div>
+            @endif
+            <tbody>
+                @each(user in users)
+                <tr>
+                        <td>{{ user.username }}</td>
+                        <td>{{user.email}}</td>
+                        <td>
+                        <a class="btn btn-success" href="{{route('UserController.edit', {id: user.id})}}">Edit</a>
+                        <a class="btn btn-warning text-light" href="{{route('UserController.delete', {id: user.id})}}">Delete</a>
+                        </td>
+                    </tr>
+                @endeach
+            </tbody>
+        </table>          
+    </div>
+@endsection

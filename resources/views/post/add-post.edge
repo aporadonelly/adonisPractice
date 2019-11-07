@@ -1,0 +1,48 @@
+@layout('layouts.main')
+
+@section('title')
+    Create Post
+@endsection
+
+@section('content')
+<div class="container mt-3">
+    <h1 class="text-center mb-5 mt-5">Ready to Post?</h1>
+    <div class="container">
+        <div class="col-sm-8 offset-sm-2">
+
+            @if(flashMessage('message'))
+                <div class="alert alert-success">
+                    <span>{{flashMessage('message')}}</span>
+                </div>
+            @endif
+            
+            <form action="{{route('PostController.create')}}" method="POST">
+                {{csrfField()}}
+
+                <div class="form-group">
+                    <label for="title">Post Title</label>
+                    <input type="text" class="form-control" id="title" aria-describedby="title" name="title" placeholder="Enter title" value="{{old('title', '')}}">
+                    @if(hasErrorFor('title'))
+                        <div class="alert alert-danger mt-3">
+                            <span>{{getErrorFor('title')}}</span>
+                        </div>
+                    @endif
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Post Description</label>
+                    <textarea type="text" class="form-control" id="description" aria-describedby="description" name="description" placeholder="Enter description" value="">{{old('description', '')}}</textarea>
+                    @if(hasErrorFor('description'))
+                        <div class="alert alert-danger mt-3">
+                            <span>{{getErrorFor('description')}}</span>
+                        </div>
+                    @endif
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Create Post</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@endsection
